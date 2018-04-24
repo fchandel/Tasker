@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -28,10 +29,14 @@ public class AdditionalDetailsActivity extends AppCompatActivity {
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                DatePicker datePicker = findViewById(R.id.reminderDate);
+
                 if (isChecked) {
                     currentTask.setReminderSet(true);
+                    datePicker.setVisibility(View.VISIBLE);
                 } else {
                     currentTask.setReminderSet(false);
+                    datePicker.setVisibility(View.INVISIBLE);
                 }
             }
         };
