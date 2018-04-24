@@ -173,15 +173,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
+        Task task = getTask(item);
         switch (item.getItemId()) {
             case R.id.AdditionalDetails:
-                startActivity(AdditionalDetailsActivity.getIntentForLaunch(this));
+                startActivity(AdditionalDetailsActivity.getIntentForLaunch(this, task));
                 break;
             default:
                 return super.onContextItemSelected(item);
         }
 
         return true;
+    }
+
+    private Task getTask(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = adapterContextMenuInfo.position;
+        Task task = taskList.getTaskList().get(position);
+        return task;
     }
 
 

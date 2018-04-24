@@ -12,8 +12,8 @@ import java.util.List;
 
 public class TaskList implements Iterable {
 
-    List<Task> taskList;
-    static TaskList instance = new TaskList();
+    private List<Task> taskList;
+    private static TaskList instance = new TaskList();
 
     private TaskList() {
         this.taskList = new ArrayList<>();

@@ -1,16 +1,22 @@
 package todo.com.chandel.farhan.todolist;
 
+import android.renderscript.RenderScript;
+
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Task Object to store each to do Task
+ * Task Object to store each Task
  */
 
 public class Task {
 
     private String task;
-    private boolean toDelete;
     private int id;
+    private Priority taskPriority;
+    private Date dueDate;
+    private boolean reminderSet;
+
     private static AtomicInteger nextId = new AtomicInteger();
 
     public int getId() {
@@ -20,8 +26,6 @@ public class Task {
     public Task(String task) {
         this.id = nextId.incrementAndGet();
         this.task = task;
-        this.toDelete = false;
-
     }
 
     public String getTask() {
@@ -32,12 +36,28 @@ public class Task {
         this.task = task;
     }
 
-    public boolean getToDelete() {
-        return toDelete;
+    public boolean isReminderSet() {
+        return reminderSet;
     }
 
-    public void setToDelete(boolean toDelete) {
-        this.toDelete = toDelete;
+    public void setReminderSet(boolean reminderSet) {
+        this.reminderSet = reminderSet;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void setTaskPriority(Priority taskPriority) {
+        this.taskPriority = taskPriority;
+    }
+
+    public Priority getTaskPriority() {
+        return taskPriority;
     }
 
     @Override

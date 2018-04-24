@@ -4,16 +4,50 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.Spinner;
+import android.widget.Switch;
 
 public class AdditionalDetailsActivity extends AppCompatActivity {
+
+    private static Task currentTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_additional_details);
+
+        setupSpinner();
+        setupSwitch();
     }
 
-    public static Intent getIntentForLaunch(Context context){
+    private void setupSwitch() {
+        Switch reminderSwitch = findViewById(R.id.reminderSwitch);
+        CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    currentTask.setReminderSet(true);
+                } else {
+                    currentTask.setReminderSet(false);
+                }
+            }
+        };
+        reminderSwitch.setOnCheckedChangeListener(onCheckedChangeListener);
+    }
+
+    private void setupSpinner() {
+        Spinner prioritySpinner = findViewById(R.id.prioritySpinner);
+        ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(this,
+                R.array.priorityArray,
+                android.R.layout.simple_dropdown_item_1line);
+        prioritySpinner.setAdapter(arrayAdapter);
+    }
+
+    public static Intent getIntentForLaunch(Context context, Task task){
+        currentTask = task;
         Intent intent = new Intent(context, AdditionalDetailsActivity.class);
         return intent;
     }

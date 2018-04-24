@@ -4,6 +4,12 @@
     <string name="input">What do you need to get done?</string>
     <string name="emptyList">Add Your First Task!</string>
     <string name="context_menu_item">Additional Details</string>
+    <string name="priority">How important is this: </string>
+    <string-array name="priorityArray">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
 
 
 </resources>
