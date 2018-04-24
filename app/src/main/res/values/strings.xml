@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="action_settings">Settings</string>
+    <string name="input">What do you need to get done?</string>
+    <string name="emptyList">Add Your First Task!</string>
+
+
+</resources>
