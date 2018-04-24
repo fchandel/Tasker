@@ -1,21 +1,15 @@
 package todo.com.chandel.farhan.todolist;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -25,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setEnterOnKeyboard();
         setOnClick();
         setOnClickDelete();
+        registerContextMenu();
+    }
+
+    private void registerContextMenu() {
+        ListView taskLW = findViewById(R.id.taskListView);
+        registerForContextMenu(taskLW);
     }
 
     private void load() {
@@ -72,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         List<String> tList = taskList.getTaskListString();
         ArrayAdapter<String> taskArrayAdapter = new ArrayAdapter<String>(this, R.layout.view, tList);
         taskLW.setAdapter(taskArrayAdapter);
-
-
     }
 
 
@@ -166,5 +163,26 @@ public class MainActivity extends AppCompatActivity {
         Task taskToAdd = new Task(task);
         taskList.addTask(taskToAdd);
     }
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.AdditionalDetails:
+                startActivity(AdditionalDetailsActivity.getIntentForLaunch(this));
+                break;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+        return true;
+    }
+
 
 }

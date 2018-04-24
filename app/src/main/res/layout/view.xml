@@ -10,6 +10,8 @@
     android:paddingBottom="20dp"
     android:drawableLeft="?android:listChoiceIndicatorMultiple"
     android:checked="false"
+    android:longClickable="true"
+    android:focusable="true"
     android:gravity="center"
     android:background="#f7f7f7"
     android:text="" />
