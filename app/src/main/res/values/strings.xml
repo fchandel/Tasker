@@ -5,10 +5,22 @@
     <string name="emptyList">Add Your First Task!</string>
     <string name="context_menu_item">Additional Details</string>
     <string name="priority">How important is this: </string>
+    <string name="set_date">Set Date</string>
+    <string name="set_time">Set Time</string>
     <string-array name="priorityArray">
         <item>High</item>
         <item>Medium</item>
         <item>Low</item>
+    </string-array>
+
+    <string-array name="setDate">
+        <item id="curern_date"></item>
+        <item id="pick_date">Pick Date</item>
+    </string-array>
+
+    <string-array name="setTime">
+        <item id="current_time"></item>
+        <item id="pick_time" >Pick Time</item>
     </string-array>
 
 

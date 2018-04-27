@@ -1,5 +1,8 @@
 package todo.com.chandel.farhan.todolist;
 
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +13,9 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TimePicker;
 
-public class AdditionalDetailsActivity extends AppCompatActivity {
+public class AdditionalDetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private static Task currentTask;
 
@@ -29,14 +33,14 @@ public class AdditionalDetailsActivity extends AppCompatActivity {
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                DatePicker datePicker = findViewById(R.id.reminderDate);
+
 
                 if (isChecked) {
                     currentTask.setReminderSet(true);
-                    datePicker.setVisibility(View.VISIBLE);
+                    android.support.v4.app.DialogFragment dialogFragment = new SetReminderFragment();
+                    dialogFragment.show(getSupportFragmentManager(), "setReminderFragment");
                 } else {
                     currentTask.setReminderSet(false);
-                    datePicker.setVisibility(View.INVISIBLE);
                 }
             }
         };
@@ -55,5 +59,15 @@ public class AdditionalDetailsActivity extends AppCompatActivity {
         currentTask = task;
         Intent intent = new Intent(context, AdditionalDetailsActivity.class);
         return intent;
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        //do code here
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+        
     }
 }
