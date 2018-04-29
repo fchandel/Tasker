@@ -5,7 +5,12 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
@@ -14,6 +19,10 @@ import java.util.Calendar;
  */
 
 public class DatePickerFragment extends DialogFragment {
+
+    private static int year,month,day;
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -21,8 +30,8 @@ public class DatePickerFragment extends DialogFragment {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-
-        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year,month,dayOfMonth);
+        Log.i("TEST", "onCreateDialog: " + getTargetFragment());
+        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getTargetFragment(), year,month,dayOfMonth);
     }
 
 }

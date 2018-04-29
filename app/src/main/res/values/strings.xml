@@ -7,6 +7,8 @@
     <string name="priority">How important is this: </string>
     <string name="set_date">Set Date</string>
     <string name="set_time">Set Time</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
     <string-array name="priorityArray">
         <item>High</item>
         <item>Medium</item>
