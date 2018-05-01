@@ -22,16 +22,20 @@
             android:paddingLeft="10dp"
             android:text="@string/set_date" />
 
-        <Spinner
-            android:id="@+id/dateSpinner"
+        <TextView
+            android:id="@+id/pickDateTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/dateTxtView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:text="@string/choose_date"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -52,17 +56,21 @@
             android:paddingLeft="10dp"
             android:text="@string/set_time" />
 
-        <Spinner
-            android:id="@+id/timeSpinner"
+        <TextView
+            android:id="@+id/pickTimeTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/timeTxtView"
-            android:layout_alignStart="@+id/dateSpinner"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_alignStart="@+id/pickDateTxtView"
             android:layout_marginBottom="40dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginLeft="20dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:text="@string/choose_time"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:textSize="15dp"/>
     </LinearLayout>
 
 </android.widget.LinearLayout>

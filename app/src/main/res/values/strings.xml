@@ -9,6 +9,8 @@
     <string name="set_time">Set Time</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="choose_time">Choose Time</string>
     <string-array name="priorityArray">
         <item>High</item>
         <item>Medium</item>

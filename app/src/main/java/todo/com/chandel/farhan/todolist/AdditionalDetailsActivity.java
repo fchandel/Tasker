@@ -27,7 +27,7 @@ import java.util.GregorianCalendar;
 public class AdditionalDetailsActivity extends AppCompatActivity  {
 
     private static Task currentTask;
-
+    private Switch reminderSwitch;
     View v;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +36,64 @@ public class AdditionalDetailsActivity extends AppCompatActivity  {
         logDate();
         setupSpinner();
         setupSwitch();
+        setupCancel();
+        setupSave();
+    }
+
+    private void setupSave() {
+        TextView save = findViewById(R.id.save_action);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (reminderSwitch.isChecked()) {
+                    if (currentTask.getDueDate() != null) {
+                        currentTask.setReminderSet(true);
+                    }
+                }
+
+                currentTask.setTaskPriority(getPriority());
+                Log.i("PRIORITY", "task pri: " + currentTask.getTaskPriority());
+                finish();
+            }
+        });
+    }
+
+    private Priority getPriority() {
+        Spinner prioritySpinner = findViewById(R.id.prioritySpinner);
+        Log.i("PRIORITY", "getPriority: " + Priority.valueOf(prioritySpinner.getSelectedItem().toString()));
+        return Priority.valueOf(prioritySpinner.getSelectedItem().toString());
+    }
+
+    private void setupCancel() {
+        TextView cancel = findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void setupSwitch() {
         Switch reminderSwitch = findViewById(R.id.reminderSwitch);
+        this.reminderSwitch = reminderSwitch;
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
 
                 if (isChecked) {
-                    currentTask.setReminderSet(true);
                     android.support.v4.app.DialogFragment dialogFragment = new SetReminderFragment();
+                    Bundle args = new Bundle();
+                    args.putBoolean("hasDueDate", currentTask.isReminderSet());
+                    if (currentTask.isReminderSet()) {
+                        args.putString("dueDate", currentTask.getDueDate().toString());
+                    }
+                    dialogFragment.setArguments(args);
                     dialogFragment.show(getSupportFragmentManager(), "setReminderFragment");
                     showReminderSetDate();
+
+//                    currentTask.setReminderSet(true);
                 } else {
                     currentTask.setReminderSet(false);
                     hideReminderSetDate();
@@ -77,7 +121,7 @@ public class AdditionalDetailsActivity extends AppCompatActivity  {
 
     public static void setDateAndTime(Activity mActivity, int year, int month, int day, int hour, int minute) {
         currentTask.setReminderSet(true);
-        Date date = makeDate(year,month,day,hour,minute);
+        Date date = new GregorianCalendar(year,month,day,hour,minute).getTime();
         currentTask.setDueDate(date);
         refreshScreen(mActivity);
     }
@@ -94,11 +138,11 @@ public class AdditionalDetailsActivity extends AppCompatActivity  {
         }
     }
 
-    private static Date makeDate(int year, int month, int day, int hour, int minute) {
-        Date date = new GregorianCalendar(year,month,day,hour,minute).getTime();
-        Log.i("TEST", "makeDate: " + date);
-        return date;
-    }
+//    private static Date makeDate(int year, int month, int day, int hour, int minute) {
+//        Date date = new GregorianCalendar(year,month,day,hour,minute).getTime();
+//        Log.i("TEST", "makeDate: " + date);
+//        return date;
+//    }
 
     private void logDate() {
         Log.i("TEST", "logDate: " + currentTask.getDueDate());
